@@ -131,3 +131,15 @@ else
     || die "nix installed but could not source — open a new shell and rerun"
   ok "nix installed"
 fi
+
+# ─── flakes ───────────────────────────────────────────────────────────────────
+section "nix flakes"
+NIX_CONF="${HOME}/.config/nix/nix.conf"
+mkdir -p "$(dirname "$NIX_CONF")"
+if grep -qE "^\s*experimental-features\s*=.*\bflakes\b" "$NIX_CONF" 2>/dev/null; then
+  ok "flakes already enabled"
+else
+  echo "experimental-features = nix-command flakes" >> "$NIX_CONF"
+  ok "flakes enabled"
+fi
+
