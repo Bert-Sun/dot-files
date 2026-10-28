@@ -79,3 +79,13 @@ else
   ok "flakes enabled"
 fi
 
+# ─── home-manager ─────────────────────────────────────────────────────────────
+section "home-manager"
+if command -v home-manager >/dev/null 2>&1; then
+  ok "home-manager already installed ($(home-manager --version))"
+else
+  info "installing home-manager..."
+  nix run home-manager/master -- init
+  export PATH="${HOME}/.nix-profile/bin:$PATH"
+  ok "home-manager installed"
+fi
