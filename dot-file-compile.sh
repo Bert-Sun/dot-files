@@ -95,16 +95,16 @@ safe_symlink() {
 # ─── preflight ────────────────────────────────────────────────────────────────
 section "preflight"
 [[ "$EUID" -eq 0 ]] && die "do not run as root"
-# [[ -d "$HM_SRC" ]]   || die "repo missing home-manager/ — is REPO_DIR correct? ($REPO_DIR)"
-# [[ -d "$DOOM_SRC" ]] || die "repo missing doom/"
-# [[ -d "$GIT_SRC" ]]  || die "repo missing git/"
+# [[ -d "$HM_SRC" ]]   || die "repo missing home-manager/ folder — is REPO_DIR correct? ($REPO_DIR)"
+# [[ -d "$DOOM_SRC" ]] || die "repo missing doom/ folder"
+[[ -d "$GIT_SRC" ]]  || die "repo missing git/ folder"
 ok "username=${GIT_USER} email=${EMAIL} repo=${REPO_DIR}"
 
 # ─── compile ──────────────────────────────────────────────────────────────────
 section "compile templates"
 # compile_dir "${HM_SRC}"   "${HM_COMPILED}"
 # compile_dir "${DOOM_SRC}" "${DOOM_COMPILED}"
-# compile_dir "${GIT_SRC}"  "${GIT_COMPILED}"
+compile_dir "${GIT_SRC}"  "${GIT_COMPILED}"
 ok "all templates compiled to ${COMPILED}/"
 
 # ─── symlink ──────────────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ for f in init.el config.el packages.el; do
   safe_symlink "${DOOM_COMPILED}/${f}" "${DOOM_DEST}/${f}"
 done
 safe_symlink "${GIT_COMPILED}/gitconfig"        "${HOME}/.gitconfig"
-safe_symlink "${GIT_COMPILED}/gitignore_global" "${HOME}/.gitignore_global"
+# safe_symlink "${GIT_COMPILED}/gitignore_global" "${HOME}/.gitignore_global"
 
 # ─── done ─────────────────────────────────────────────────────────────────────
 section "done"

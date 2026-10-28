@@ -1,0 +1,36 @@
+[user]
+	name  = BOOTSTRAP_GIT_USER
+	email = BOOTSTRAP_EMAIL
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[core]
+	# editor     = emacsclient -t
+	autocrlf   = input
+	# enable for global ignores
+	# excludesfile = ~/.gitignore_global
+
+# [alias]
+# 	s  = status -sb
+# 	l  = log --oneline --graph --decorate -20
+# 	la = log --oneline --graph --decorate --all -20
+# 	d  = diff
+# 	ds = diff --staged
+# 	co = checkout
+# 	br = branch -vv
+
+[diff]
+	tool = ediff
+
+[merge]
+	tool = ediff
+
+# [difftool "ediff"]
+# 	cmd = emacsclient -c --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
